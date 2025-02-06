@@ -9,8 +9,7 @@ import API_URL from "../utils/constants.js";
 const Chat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([])
-  const [targetName, setTargetName] = useState("");
-  const [targetPhoto, setTargetPhoto] = useState("");
+  const [targetUser, setTargetUser] = useState({});
   const user = useSelector(state => state.user);
   const userId = user?._id;
   const sentSound = new Audio('../../public/sound/MessageSent.mp3');
@@ -36,13 +35,8 @@ const Chat = () => {
   const getChat = async() => {
     try {
       const response = await axios.get(API_URL + "chat/" + targetUserId, { withCredentials: true });
-      console.log(response.data.data[0].messages);
+      setTargetUser(response?.data.targetUser);
       const chatMessages = response.data.data[0].messages.map((chat) => {
-        if (chat.senderId._id !== userId) {
-          setTargetName(chat.senderId.firstName + " " + chat.senderId.lastName);
-          setTargetPhoto(chat.senderId.photoUrl);
-        }
-        console.log(targetName, targetPhoto);
         return {
           userId:chat.senderId._id,
           firstName: chat.senderId.firstName,
@@ -53,6 +47,7 @@ const Chat = () => {
         //photoUrl:
       }
       })
+      
       setMessages(chatMessages);
       //console.log(messages);
     } catch (error) {
@@ -82,9 +77,17 @@ const Chat = () => {
     
     socket.on("messageReceived", ({ firstName, text, userId, photoUrl }) => {
       // received msgs
-
       setMessages((messages) => [...messages, { firstName, text, userId, photoUrl }]);
-    })    
+    })
+    
+    socket.on("userStatusUpdate", ({ userId, isOnline, lastSeen }) => {
+      setMessages((prev) =>
+        prev.map((p) =>
+          p.user._id === userId ? { ...p, isOnline, lastSeen } : p
+        )
+      );
+    });
+    console.log("messages", messages);
     return() => {
       socket.disconnect();
     }
@@ -98,9 +101,9 @@ const Chat = () => {
     <div className="w-8/12 mx-auto border border-gray-600 m-5 h-[80vh] flex flex-col">
       
         <div className="bg-base-300 h-12 px-5 align-middle py-1 flex border-gray-600 border-b">
-        <img src={targetPhoto} alt="" className="h-10 w-10 rounded-full" />
+        <img src={targetUser.photoUrl} alt="" className="h-10 w-10 rounded-full" />
         <div>
-          <p className="ml-3">{targetName}</p>
+          <p className="ml-3">{targetUser.firstName+" "+targetUser.lastName}</p>
         <p className="text-xs ml-3">{ "online"}</p>
         </div>
       </div>

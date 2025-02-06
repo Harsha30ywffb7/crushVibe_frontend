@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 
 import Body from './components/Body';
 import Chat from './components/Chat'; 
-import User from './components/User';
 import Login from './components/Login';
 import appStore from './utils/appStore';
 import Feed from './components/Feed';
@@ -23,7 +22,6 @@ const App = () => {
               {/* <Route path="/" element={<Hero />} /> */}
                <Route path="/" element={<Feed />} />
                <Route path="chat/:targetUserId" element={<Chat />} />
-              <Route path="user" element={<User />} />
               <Route path="connections" element={<Connections />} />
               <Route path="requests" element={<Requests/>} />
               <Route path="profile" element={<Profile />} />

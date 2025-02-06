@@ -11,5 +11,11 @@
 # chats
 
 - Header for user in chat
+- online offline status or lastseen
 - Sounds for messages and notifications
 - Better UI
+
+# fixes
+
+- navigation colors
+- Header for chat

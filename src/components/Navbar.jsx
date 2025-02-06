@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { removeUser } from "../utils/userSlice";
 import API_URL from "../utils/constants.js";
 import axios from "axios";
+import { useLocation } from "react-router";
 
 const Navbar = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatcher = useDispatch();
   let user = useSelector((state) => state.user);
@@ -22,6 +24,7 @@ const Navbar = () => {
     //console.log(res);
     navigate('/login');
   };
+  console.log("for pathname",location.pathname)
 
   return (
     <div>
@@ -34,9 +37,20 @@ const Navbar = () => {
 
         <div>
           <ul className=" flex justify-center gap-20">
-            <Link to="/connections">Connections</Link>
-            <Link to="/requests">Requests</Link>
-            <Link>Contact</Link>
+            <Link
+      to="/connections"
+      className={` ${
+        location.pathname === "/connections" ? " text-[#a28bf0] font-bold" : "text-white"
+      }`}
+    >
+      Connections
+    </Link>
+            <Link to="/requests" className={` ${
+        location.pathname === "/requests" ? " text-[#a28bf0] font-bold" : "text-white"
+      }`}>Requests</Link>
+            <Link to="/" className={` ${
+        location.pathname === "/contact" ? " text-[#a28bf0] font-bold" : "text-white"
+      }`}>Contact</Link>
           </ul>
         </div>
 

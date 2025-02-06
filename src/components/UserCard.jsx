@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux';
 const UserCard = ({ user }) => {
   const [hovered, setHovered] = useState(false);
   const dispatcher = useDispatch();
-  console.log("user:   ", user);
   if (user === undefined) {
     return <h1 className="text-center my-10">No New Users Found</h1>
   }
@@ -34,7 +33,7 @@ const UserCard = ({ user }) => {
 
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center mt-8">
       {/* Card Container */}
       <div
         className="relative w-80 h-[450px] rounded-xl shadow-2xl overflow-hidden transform transition-transform hover:scale-102"
@@ -69,7 +68,7 @@ const UserCard = ({ user }) => {
         <div className="absolute bottom-0 left-0 right-0 p-4 text-white bg-white/20 backdrop-blur-md rounded-t-xl">
           <h2 className="text-2xl font-bold">{firstName} {lastName}</h2>
           {age && gender && <p className="text-base mt-1">{age} • {gender}</p>}
-          <p className="text-sm mt-2">{about}</p>
+          <p className="text-sm mt-2 line-clamp-2">{about}</p>
         </div>
 
         {/* Action Buttons - Only Visible on Hover */}
