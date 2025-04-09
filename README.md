@@ -15,6 +15,8 @@
 - Sounds for messages and notifications
 - Better UI
 
+# payment gateway integration
+
 # fixes
 
 - navigation colors

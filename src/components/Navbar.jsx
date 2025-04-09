@@ -48,9 +48,13 @@ const Navbar = () => {
             <Link to="/requests" className={` ${
         location.pathname === "/requests" ? " text-[#a28bf0] font-bold" : "text-white"
       }`}>Requests</Link>
-            <Link to="/" className={` ${
+            <Link to="/contact" className={` ${
         location.pathname === "/contact" ? " text-[#a28bf0] font-bold" : "text-white"
-      }`}>Contact</Link>
+              }`}>Contact</Link>
+            
+            <Link to="/premium" className={` ${
+        location.pathname === "/premium" ? " text-[#a28bf0] font-bold" : "text-white"
+      }`}>Premium</Link>
           </ul>
         </div>
 

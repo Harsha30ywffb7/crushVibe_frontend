@@ -10,6 +10,9 @@ import Error from './components/Error'
 import Profile from './components/Profile';
 import Connections from './components/Connections';
 import Requests from './components/Requests';
+import Premium from './components/Premium'
+import Contact from './components/Contact';
+import VideoChat from './components/VideoChat';
 
 const App = () => {
    
@@ -25,7 +28,11 @@ const App = () => {
               <Route path="connections" element={<Connections />} />
               <Route path="requests" element={<Requests/>} />
               <Route path="profile" element={<Profile />} />
+              <Route path='premium' element={<Premium />} />
+              <Route path='contact' element={<Contact />} />
             </Route>
+
+            <Route path='videoCall/:targetUserId' element={ <VideoChat/>} />
 
             <Route path="/login" element={<Login/>} /> 
             
